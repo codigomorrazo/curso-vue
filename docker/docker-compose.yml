@@ -1,0 +1,17 @@
+version: '3.3'
+services: 
+  frontend:
+    image: node:lts-alpine3.13
+    ports:
+      - "${LOCAL_FRONT_PORT}:4200"
+      - "49153:49153"
+#    command: "npm run -- ng serve --host 0.0.0.0 --disable-host-check"
+    expose:
+      - "4200"
+      - "49153"
+    environment:
+      - .env
+    volumes:
+      - "./app/portafolio:/var/www/html"
+    tty: true
+
