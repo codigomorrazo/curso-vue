@@ -1,17 +1,16 @@
 version: '3.3'
 services: 
   frontend:
-    image: node:lts-alpine3.13
+    image: node:lts-alpine3.14
+    working_dir: ${IMAGE_WORKDIR}
     ports:
-      - "${LOCAL_FRONT_PORT}:4200"
-      - "49153:49153"
-#    command: "npm run -- ng serve --host 0.0.0.0 --disable-host-check"
+      - "${LOCAL_FRONT_PORT}:8081"
+#    command: sh -c "cp -n .env.dist .env && npm install && npm run dev"
     expose:
-      - "4200"
-      - "49153"
+      - "${LOCAL_FRONT_PORT}"
     environment:
       - .env
     volumes:
-      - "./app/portafolio:/var/www/html"
+#      - "${HOST_APP_DIR}/vue-trello:${IMAGE_WORKDIR}"
+      - "${HOST_APP_DIR}:${IMAGE_WORKDIR}"
     tty: true
-
